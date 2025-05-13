@@ -1,0 +1,14 @@
+package com.smarthome.smart_home_dashboard.dto;
+
+import com.smarthome.smart_home_dashboard.model.Role;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class UserDto {
+    private Long id;
+    private String email;
+    private String password;
+    private Role role;
+}
