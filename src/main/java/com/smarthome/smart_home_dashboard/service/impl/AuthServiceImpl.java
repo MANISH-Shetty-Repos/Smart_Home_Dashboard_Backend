@@ -12,8 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.smarthome.smart_home_dashboard.model.Role;
+import com.smarthome.smart_home_dashboard.exception.ResourceExistsException;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,37 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    @Transactional
+    public AuthResponse register(UserDto userDto) {
+        if (userRepository.existsByEmail(userDto.getEmail())) {
+            throw new ResourceExistsException("User with email '" + userDto.getEmail() + "' already exists");
+        }
+
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRole(Role.USER); // Default role
+
+        User savedUser = userRepository.save(user);
+
+        String token = jwtService.generateToken(savedUser);
+        String refreshToken = jwtService.generateRefreshToken(savedUser);
+
+        UserDto responseUserDto = UserDto.builder()
+                .id(savedUser.getId())
+                .email(savedUser.getEmail())
+                .role(savedUser.getRole())
+                .build();
+
+        return AuthResponse.builder()
+                .token(token)
+                .refreshToken(refreshToken)
+                .user(responseUserDto)
+                .build();
+    }
 
     @Override
     @Transactional(readOnly = true)
