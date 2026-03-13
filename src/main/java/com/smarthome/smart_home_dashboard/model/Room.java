@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "rooms")
 @Data
+
 @NoArgsConstructor
 @ToString(exclude = "devices")
 public class Room {
