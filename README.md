@@ -1,86 +1,23 @@
-#  Smart Home Dashboard
+# Smart Home Dashboard Backend
 
-A **backend-driven Smart Home Dashboard application** built using **Java, Spring Boot, and MySQL**, enabling real-time monitoring and control of smart devices.
-The system is designed with scalability, modularity, and clean API architecture in mind.
+This project provides a robust and scalable backend infrastructure for a collaborative smart home management system. It enables secure user interaction with IoT devices, offering real-time status synchronization and a complete audit trail for environmental changes. The architecture emphasizes high data integrity, modular service layers, and production-ready containerization.
 
----
+## Key Features
 
-##  Project Overview
+- User Authentication: Secure registration and login using JWT with access and refresh tokens.
+- Room Management: Organize home layouts into rooms with nested device relationships.
+- Device Control: Manage smart devices with dedicated toggle functionality for state changes.
+- Audit History Tracking: Automated logging of device actions, user involvement, and timestamps.
+- Real-Time Updates: WebSocket integration via STOMP for instant cross-client synchronization.
+- API Documentation: Interactive Swagger UI support with integrated JWT authorization.
 
-The Smart Home Dashboard allows users to **monitor device status, control smart appliances, and manage user roles** through RESTful APIs.
-This project focuses on **robust backend engineering**, database design, and seamless integration with frontend components.
+## Tech Stack
 
-The application follows standard **software development life cycle (SDLC)** practices and a layered backend architecture.
-
----
-
-## ✨ Key Features
-
-* 🔌 **Smart Device Management**
-
-  * Add, update, monitor, and control smart devices
-* 🔄 **Real-Time State Handling**
-
-  * Track device states and control history
-* 👤 **User Role Management**
-
-  * Role-based access for administrators and users
-* 🌐 **RESTful API Design**
-
-  * Clean and scalable APIs built with Spring Boot
-* 🗄️ **Optimized Database Design**
-
-  * MySQL schemas with high data integrity
-* 🧩 **Modular Architecture**
-
-  * Controller–Service–Repository layering
-
-
-
-## 🛠️ Tech Stack
-
-### 🔹 Backend
-
-* Java
-* Spring Boot
-* Spring MVC
-* REST APIs
-
-### 🔹 Database
-
-* MySQL
-
-### 🔹 Tools & Practices
-
-* Git & GitHub
-* SDLC
-* API testing (Postman)
-
-
-
-## ⚙️ How to Run the Project
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/your-username/smart-home-dashboard.git
-cd smart-home-dashboard
-```
-
-### 2️⃣ Configure Database
-
-* Create a MySQL database
-* Update credentials in `application.properties`
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/smart_home
-spring.datasource.username=root
-spring.datasource.password=your_password
-```
-
-### 3️⃣ Run the Application
-
-```bash
-mvn spring-boot:run
-```
-
+- Core Framework: Java 17 and Spring Boot 3.2.4
+- Security: Spring Security 6 with BCrypt password hashing and JJWT library
+- Persistence: MySQL 8.0, Spring Data JPA, and Hibernate ORM
+- Database Governance: Flyway for automated schema migrations
+- API Specification: OpenAPI 3 (Swagger UI) with JWT Bearer support
+- Real-Time Communication: Spring WebSocket with STOMP message broker
+- Infrastructure: Docker and Docker Compose for containerized environment management
+- Utilities: Lombok, ModelMapper, and Slf4j logging
