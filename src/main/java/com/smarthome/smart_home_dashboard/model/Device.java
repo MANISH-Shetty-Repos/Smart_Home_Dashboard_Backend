@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@Table(name = "devices")
 @Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "room")
